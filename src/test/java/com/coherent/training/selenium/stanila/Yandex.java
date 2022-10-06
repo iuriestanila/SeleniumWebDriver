@@ -22,27 +22,6 @@ public class Yandex {
         softAssert = new SoftAssert();
     }
 
-    @SneakyThrows
-    public void login(){
-        driver.manage().window().maximize();
-        driver.get("https://mail.yandex.com/");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
-
-        driver.findElement(Locators.LOG_CENTRAL_PAGE).click();
-
-        driver.findElement(Locators.USERNAME_SPACE).sendKeys(USERNAME);
-        TimeUnit.SECONDS.sleep(1);
-
-        driver.findElement(Locators.LOG_USERNAME).click();
-        TimeUnit.SECONDS.sleep(2);
-
-        driver.findElement(Locators.PASSWORD_SPACE).sendKeys(PASSWORD);
-        TimeUnit.SECONDS.sleep(2);
-
-        driver.findElement(Locators.LOGIN_PASSWORD).click();
-        TimeUnit.SECONDS.sleep(4);
-    }
-
     @Test
     public void testLogInSuccessful() {
         login();
@@ -87,6 +66,27 @@ public class Yandex {
     @AfterMethod
     public void tearDown() {
         driver.quit();
+    }
+
+    @SneakyThrows
+    public void login(){
+        driver.manage().window().maximize();
+        driver.get("https://mail.yandex.com/");
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
+
+        driver.findElement(Locators.LOG_CENTRAL_PAGE).click();
+
+        driver.findElement(Locators.USERNAME_SPACE).sendKeys(USERNAME);
+        TimeUnit.SECONDS.sleep(1);
+
+        driver.findElement(Locators.LOG_USERNAME).click();
+        TimeUnit.SECONDS.sleep(2);
+
+        driver.findElement(Locators.PASSWORD_SPACE).sendKeys(PASSWORD);
+        TimeUnit.SECONDS.sleep(2);
+
+        driver.findElement(Locators.LOGIN_PASSWORD).click();
+        TimeUnit.SECONDS.sleep(4);
     }
 }
 

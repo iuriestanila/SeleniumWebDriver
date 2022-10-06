@@ -22,9 +22,8 @@ public class Yandex {
         softAssert = new SoftAssert();
     }
 
-    @Test
     @SneakyThrows
-    public void logInSuccessful() {
+    public void login(){
         driver.manage().window().maximize();
         driver.get("https://mail.yandex.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
@@ -42,36 +41,39 @@ public class Yandex {
 
         driver.findElement(Locators.LOGIN_PASSWORD).click();
         TimeUnit.SECONDS.sleep(4);
+    }
 
+    @Test
+    public void testLogInSuccessful() {
+        login();
         String expectedTitle = "Inbox — Yandex Mail";
         softAssert.assertEquals(driver.getTitle(),expectedTitle);
         softAssert.assertAll();
     }
 
     @Test
-    public void inboxEnabled(){
-        logInSuccessful();
+    public void testInboxEnabled(){
+        login();
         softAssert.assertTrue(driver.findElement(Locators.cssSelector).isEnabled());
         softAssert.assertAll();
     }
 
-
     @Test
-    public void displayUsername(){
-        logInSuccessful();
+    public void testDisplayUsername(){
+        login();
         softAssert.assertTrue(driver.findElement(Locators.USERNAME_DISPLAY).isDisplayed());
         softAssert.assertAll();
     }
 
     @Test
-    public void addLabelEnabled(){
-        logInSuccessful();
+    public void testAddLabelEnabled(){
+        login();
         softAssert.assertTrue(driver.findElement(Locators.LABEL).isEnabled());
         softAssert.assertAll();
     }
 
     @Test
-    public void sumOfLinks(){
+    public void testSumOfLinks(){
         driver.manage().window().maximize();
         driver.get("https://mail.yandex.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(4));
